@@ -30,31 +30,43 @@
     </div>
     <button type="submit" class="btn btn-primary">Filter</button>
 </form>
-
-<table class="table">
+<hr>
+<div class="mb-3">
+                            <a href="{{ route('cars.create') }}" class="btn btn-success">Pridėti nauja masina</a>
+                        </div>
+                        <table class="table">
     <thead>
         <tr>
             <th>License Plate</th>
             <th>Manufacturer</th>
             <th>Model</th>
             <th>Owner</th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
     </thead>
     <tbody>
-    @foreach($cars as $car)
-    <tr>
-        <td>{{ $car->license_plate }}</td>
-        <td>{{ $car->manufacturer }}</td>
-        <td>{{ $car->model }}</td>
-        @if ($car->owner)
-            <td>{{ $car->owner->name }} {{ $car->owner->surname }}</td>
-        @else
-            <td>Unknown owner</td>
-        @endif
-    </tr>
-@endforeach
-</tbody>
-
+        @foreach($cars as $car)
+            <tr>
+                <td>{{ $car->license_plate }}</td>
+                <td>{{ $car->manufacturer }}</td>
+                <td>{{ $car->model }}</td>
+                @if ($car->owner)
+                    <td>{{ $car->owner->name }} {{ $car->owner->surname }}</td>
+                @else
+                    <td>Unknown owner</td>
+                @endif
+                <td><a href="{{ route('cars.edit', $car->id) }}" class="btn btn-primary">Edit</a></td>
+                <td>
+                    <form action="{{ route('cars.destroy', $car->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this car?')">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        @endforeach
+    </tbody>
 </table>
 
                     </div>
