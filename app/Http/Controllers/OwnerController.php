@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Owner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App; 
+use App\Http\Middleware\PermissionMiddleware;
 
 class OwnerController extends Controller
 {
