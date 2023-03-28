@@ -30,6 +30,17 @@ class CarController extends Controller
 
     public function index(Request $request)
     {
+
+        $licensePlateRule = 'nullable|regex:/^[A-Z]{3}[0-9]{3}$/';
+
+        $validatedData = $request->validate([
+            'license_plate' => $licensePlateRule,
+            'manufacturer' => 'nullable|string|max:255',
+            'model' => 'nullable|string|max:255',
+        ], [
+            'license_plate.regex' => __('messages.invalid_license_plate'),
+        ]);
+
         $carsQuery = Car::query();
     
         if ($request->filled('owner') && $request->input('owner') !== 'All') {
@@ -64,11 +75,15 @@ class CarController extends Controller
 
     public function store(Request $request)
     {
+        $licensePlateRule = 'required|regex:/^[A-Z]{3}[0-9]{3}$/';
+
         $validatedData = $request->validate([
             'manufacturer' => 'required|string|max:255',
             'model' => 'required|string|max:255',
-            'license_plate' => 'required|string|unique:cars,license_plate|max:7',
+            'license_plate' => $licensePlateRule,
             'owner_id' => 'nullable|exists:owners,id'
+        ], [
+            'license_plate.regex' => __('messages.invalid_license_plate'),
         ]);
 
         $car = new Car();

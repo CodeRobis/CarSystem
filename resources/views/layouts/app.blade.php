@@ -35,13 +35,13 @@
                             <a href="{{ route('cars.index') }}"  class="nav-link">Masinos</a>
                         </li>
 
-
-                        <!-- <li class="nav-item">
-                            <a href="{{ route('setLanguage','lt') }}" class="nav-link">LT</a>
+                        <li class="nav-item">
+                            <a href="{{ route('changeLanguage','lt') }}" class="nav-link">LT</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('setLanguage','en') }}" class="nav-link">EN</a>
-                        </li> -->
+                            <a href="{{ route('changeLanguage','en') }}" class="nav-link">EN</a>
+                        </li>
+                        <p>Current locale: {{ App::getLocale() }}</p>
 
                     </ul>
 

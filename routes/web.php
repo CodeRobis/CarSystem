@@ -19,19 +19,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware('auth')->group(function (){
-//     Route::get('/students/create',[ StudentController::class, 'create'])->name('students.create');
-//     Route::post('/students/save',[ StudentController::class, 'save'])->name('students.save');
-//     Route::get('/students/{id}/edit',[ StudentController::class, 'edit'])->name('students.edit');
-//     Route::post('/students/{id}/update',[StudentController::class,'update'])->name('students.update');
-//     Route::get('/students/{id}/delete',[StudentController::class,'delete'])->name('students.delete')->middleware('suaugusiems');
-//     Route::resource('courses', CourseController::class);
-// });
-
-
-// Route::get('/students',[StudentController::class, 'index'])->name('students.index');
-// Route::post('/students/search',[StudentController::class,'search'])->name('students.search');
-
 // Route::middleware(['auth', 'permission'])->group(function () {
     // Create Owner
     Route::get('/owners/create', [OwnerController::class, 'create'])->name('owners.create');
@@ -70,4 +57,6 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::get('/setLanguage/{language}', [LanguageController::class, 'setLanguage'])->name("setLanguage");
+// language control
+Route::get('language/{locale}', [LanguageController::class, 'changeLanguage'])->name('changeLanguage');
+
