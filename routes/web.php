@@ -45,6 +45,9 @@ use Illuminate\Support\Facades\Route;
     Route::put('/cars/{car}', [CarController::class, 'update'])->name('cars.update');
     // Delete Car
     Route::delete('/cars/{car}', [CarController::class, 'destroy'])->name('cars.destroy');
+
+    Route::post('/cars/{car}/photos', [CarController::class, 'uploadPhoto'])->name('cars.uploadPhoto');
+    Route::delete('/cars/{car}/photos/{photoId}', [CarController::class, 'deletePhoto'])->name('cars.deletePhoto');
 // });
 
 Route::get('/', function () {

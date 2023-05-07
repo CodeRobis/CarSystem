@@ -21,5 +21,9 @@ return [
     'birthYear' => 'Gimimo metai',
     'invalid_name' => 'Netinkamai ivestas vardas, ziurekite, kad butu vartuojamos tik abeceles raides',
     'invalid_surname' => 'Netinkamai ivestas pavarde, ziurekite, kad butu vartuojamos tik abeceles raides',
-    'invalid_license_plate' => 'Valstybinis numeris turi būti formato ABC123, kur ABC yra raidės, o 123 yra skaičiai.'
+    'invalid_license_plate' => 'Valstybinis numeris turi būti formato ABC123, kur ABC yra raidės, o 123 yra skaičiai.',
+    'photos' => 'Nuotraukų įkėlimas',
+    'upload' => 'Įkelti',
+    'editCar' => 'Koreguoti mašinos duomenys',
+    'currentPhotos' => 'Nuotraukos'
 ];
