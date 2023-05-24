@@ -43,6 +43,13 @@ class CarController extends Controller
         ]);
 
         $carsQuery = Car::query();
+        
+        // If user is not an admin or read_user, only allow them to view their cars
+        if (auth()->user()->role == 'user') {
+            $carsQuery = $carsQuery->whereHas('owner', function ($query) {
+                $query->where('user_id', auth()->id());
+            });
+        }
     
         if ($request->filled('owner') && $request->input('owner') !== 'All') {
             $carsQuery->where('owner_id', $request->input('owner'));
@@ -99,14 +106,18 @@ class CarController extends Controller
     }
 
     public function edit(Car $car)
-    {
-        $owners = Owner::orderBy('surname')->get();
+{
+    $this->authorize('update', $car);
+
+    $owners = Owner::orderBy('surname')->get();
     
-        return view('cars.edit', compact('car', 'owners'));
-    }
+    return view('cars.edit', compact('car', 'owners'));
+}
     
     public function update(Request $request, Car $car)
     {
+        $this->authorize('update', $car);
+
         $validatedData = $request->validate([
             'manufacturer' => 'required|string|max:255',
             'model' => 'required|string|max:255',
@@ -144,7 +155,7 @@ class CarController extends Controller
 
     public function destroy(Car $car)
     {
-
+        $this->authorize('delete', $car);
         Log::info('Delete method called for car ' . $car->id);
         $car->delete();
         return redirect()->route('cars.index')->with('success', 'Car deleted successfully');

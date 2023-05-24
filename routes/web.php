@@ -48,7 +48,9 @@ use Illuminate\Support\Facades\Route;
 
     Route::post('/cars/{car}/photos', [CarController::class, 'uploadPhoto'])->name('cars.uploadPhoto');
     Route::delete('/cars/{car}/photos/{photoId}', [CarController::class, 'deletePhoto'])->name('cars.deletePhoto');
-// });
+
+    Route::post('/change-role', [App\Http\Controllers\UserController::class, 'changeRole'])->name('user.changeRole');
+
 
 Route::get('/', function () {
     return view('welcome');
